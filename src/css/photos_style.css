@@ -58,15 +58,19 @@ html, body {
 #btn_input_pics {
     cursor: pointer;
 }
-#menu_options {
+#frame_menu_options {
     position: absolute;
     width: 100%;
     height: 100%;
     visibility: hidden;
 }
 
-#menu_options * {
+#frame_menu_options * {
     visibility: visible;
+}
+#menu_options {
+    background-color: rgb(31, 31, 31);
+    box-shadow: -10px 0px 10px 0px rgb(31, 31, 31);
 }
 #frame_window_controls {
     display: flex;

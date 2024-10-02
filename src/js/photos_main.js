@@ -17,64 +17,38 @@ let maxHeight = 0
 let startX, startY
 let startLeft, startTop
 
+let eventNames = ["selectionstart", "dragstart", "contextmenu"]
+let allElements = document.querySelectorAll("#wrapper *")
+for (let elmt of allElements) {
+    for (let evntNm of eventNames) {
+        elmt.addEventListener(evntNm, (event) => {
+            event.preventDefault()
+        })
+    }
+}
+
 
 window.addEventListener("resize", () => {
     // adjustPicHeight()
 })
-function adjustPicHeight() {
-    //let height = framePic.parentNode.clientHeight - (footerBar.clientHeight + menuBar.clientHeight)
-    //let height = framePic.parentNode.offsetHeight - (footerBar.offsetHeight + menuBar.offsetHeight)
-    //let height = framePic.parentNode.getBoundingClientRect().height - (footerBar.getBoundingClientRect().height + menuBar.getBoundingClientRect().height)
-    // let maxHeight
-    // let parentHeight = picture.parentNode.getBoundingClientRect().height
-    //  if (picture.style.height >= parentHeight ) {
-    //     if (isHidden){
-    //         maxHeight = parentHeight - 90
-    //     } else {
-    //         maxHeight = parentHeight 
-    //     }
-    //  }
-    viewPicture.style.maxHeight = maxHeight + "px"
-}
 
 const viewPicture = new View(document.getElementById("view_picture"));
 viewPicture.getElement().addEventListener("transitionstart", function () {
-    const interval = setInterval(()=>{        
+    const interval = setInterval(() => {
         showZoomInfo()
     }, 100)
 
-    viewPicture.getElement().addEventListener("transitionend", function () {        
+    viewPicture.getElement().addEventListener("transitionend", function () {
         clearInterval(interval)
         showZoomInfo()
-    }, {once: true})
-})
-viewPicture.getElement().addEventListener("dragstart", (event)=>{
-    event.preventDefault() // evita mostrar el fantasma de la imagen al arrastrar con el click izquierdo    
+    }, { once: true })
 })
 /* viewPicture.getElement().addEventListener("contextmenu", (event)=>{
     event.preventDefault() // evita mostrar el contextmenu de la imagen al arrastrar con el click derecho
 }) */
-function showPicture(num) {
-    if (input.files != 0) {
-        files = input.files
-        picture = new Picture(files[num])
-        // let file = files[num]
-        // viewPicture.src = URL.createObjectURL(file)
-        viewPicture.src = picture.getURL()
-        showPicTitle(picture.getName())
-    }
-}
-function showRandomPic() {
-    index = (Math.floor(Math.random() * 10000)) % files.length
-    showPicture(index)
-}
 
 
 const viewPicTitle = document.getElementById("picture_title")
-function showPicTitle(name) {
-    viewPicTitle.innerHTML = name
-}
-
 const viewZoomPercent = document.getElementById("zoom_percent")
 
 
@@ -82,60 +56,20 @@ const btnNext = document.getElementById("btn_next")
 btnNext.addEventListener("click", () => {
     showNextPicture()
 })
-function showNextPicture() {
-    if (index == input.files.length - 1) {
-        index = 0
-    } else {
-        index++
-    }
-    showPicture(index)
-}
-
 const btnPrev = document.getElementById("btn_previous")
 btnPrev.addEventListener("click", function () {
     showPrevPicture()
 })
-function showPrevPicture() {
-    if (index == 0) {
-        index = input.files.length - 1
-    } else {
-        index--
-    }
-    showPicture(index)
-}
-
-
 // const btnShift = document.getElementById("btn_menu_shift")
 // btnShift.addEventListener("click", function () {
 //     showRandomPic()
 // })
-
-const menuBar = document.getElementById("menu_bar")
-const footerBar = document.getElementById("footer_bar")
 const btnFullscreen = document.getElementById("btn_fullscreen")
 btnFullscreen.addEventListener("click", function () {
     if (viewPicture.isOverflowHidden()) {
         hideBars()
     }
 })
-function hideBars() {
-    footerBar.style.transform = "translateY(40px)"
-    menuBar.style.transform = "translateY(-50px)"
-    framePic.style.overflow = "visible"
-    viewPicture.setOverflow("visible")    
-    console.log(viewPicture.getOverflow())
-    // isHidden = true   
-}
-function showBars() {
-    footerBar.style.transform = "translateY(0px)"
-    menuBar.style.transform = "translateY(0px)"
-    // framePic.style.overflow = "hidden"
-    viewPicture.setOverflow("hidden")
-     
-    console.log(viewPicture.getOverflow())
-    // isHidden = false
-}
-
 // listening to ESC button to close fullscreen mode
 document.addEventListener("keydown", function (eDown) {
     if (!viewPicture.isOverflowHidden()) {
@@ -145,6 +79,14 @@ document.addEventListener("keydown", function (eDown) {
     }
 })
 
+const menuBar = document.getElementById("menu_bar")
+const footerBar = document.getElementById("footer_bar")
+
+viewPicTitle.addEventListener("selectionstart", (event) => {
+    alert("seletion")
+    event.preventDefault()
+})
+
 
 const btnRotatePic = document.getElementById("btn_rotate")
 btnRotatePic.addEventListener("click", function () {
@@ -152,52 +94,9 @@ btnRotatePic.addEventListener("click", function () {
     angle = viewPicture.getRotation() + factor
     rotatePic(angle)
 })
-function rotatePic(deg) {
-    // rotation = deg
-    // viewPicture.style.transform = "rotate(" + rotation + "deg)"
-    // if (deg == 360) {
-    //     transition = viewPicture.getStyle().transition
-    //     rotationR().then(console.log("done"))
-    //     viewPicture.setRotation(deg)
-    //     viewPicture.setRotation(15)
-
-
-    //     viewPicture.style.transition = transition
-
-    //     //quitar tranciion de rotacion
-    //     //rotas al valor predeterminado
-    //     //activas trancicion de rotacion
-    // } else {
-
-    viewPicture.setRotation(deg)
-    // }
-}
-function rotationR() {
-    return new Promise((resolve) => {
-
-        viewPicture.style.transition = "transform 0.0s ease"
-        setTimeout(() => {
-
-            resolve()
-        }, 1000)
-
-    })
-}
-function rotationA() {
-    return new Promise((resolve) => {
-
-        viewPicture.setRotation(deg)
-        viewPicture.style.transition = "transform 0.0s ease"
-        setTimeout(() => {
-            resolve()
-        }, 500)
-
-    })
-}
-
 
 const btnZoomFit = document.getElementById("btn_zoom_fit")
-const btnZoomIn  = document.getElementById("btn_zoom_in")
+const btnZoomIn = document.getElementById("btn_zoom_in")
 const btnZoomOut = document.getElementById("btn_zoom_out")
 
 btnZoomIn.addEventListener("click", zoomIn)
@@ -214,33 +113,8 @@ btnZoomFit.addEventListener("click", function () {
     // viewPicture.style.transform = "rotate("+ rotation +"deg)"
 
 })
-function getZoom() {
-    return viewPicture.getScale()
-}
-function setZoom(zoom) {
-    viewPicture.style.scale = zoom
-}
-function zoomIn() {
-    setZoom(getZoom() + 0.5)
-    // showZoomInfo()
-}
-function zoomOut() {
-    if (getZoom() > 0.5) {
-        setZoom(getZoom() - 0.5)
-    }
-    // showZoomInfo()
-}
-function showZoomInfo() {
-    // setTimeout(()=>{
-    viewZoomPercent.innerHTML = (getZoom() * 100).toFixed(0) + "%"
-    // }, 500)
 
-}
-
-
-
-
-const btnHeart =    document.getElementById("btn_heart")
+const btnHeart = document.getElementById("btn_heart")
 const btnHeartImg = document.querySelector("#btn_heart img")
 btnHeart.addEventListener("click", function () {
     if (btnHeartImg.src.includes("/src/icons/heart_empty_white_1.png")) {
