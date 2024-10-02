@@ -12,7 +12,10 @@ function adjustPicHeight() {
     //         maxHeight = parentHeight 
     //     }
     //  }
-    viewPicture.style.maxHeight = maxHeight + "px"
+    let maxHeight = viewframePic.getStyle().height
+    viewPicture.style.height = maxHeight
+    console.log(maxHeight)
+    console.log(viewPicture.style.height)
 }
 
 
@@ -22,7 +25,8 @@ function showPicture(num) {
         picture = new Picture(files[num])
         // let file = files[num]
         // viewPicture.src = URL.createObjectURL(file)
-        viewPicture.getElement().src = picture.getURL()
+        viewPicture.getElement().src = picture.getURL()        
+        adjustPicHeight()
         showPicTitle(picture.getName())
     }
 }
@@ -54,14 +58,12 @@ function hideBars() {
     footerBar.style.transform = "translateY(40px)"
     menuBar.style.transform = "translateY(-50px)"
     framePic.style.overflow = "visible"
-    viewPicture.setOverflow("visible")    
-    console.log(viewPicture.getOverflow())
+    // viewPicture.setOverflow("visible")
 }
 function showBars() {
     footerBar.style.transform = "translateY(0px)"
     menuBar.style.transform = "translateY(0px)"
     viewPicture.setOverflow("hidden")
-    console.log(viewPicture.getOverflow())
 }
 
 function rotatePicRight(deg) {

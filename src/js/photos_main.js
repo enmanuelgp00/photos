@@ -21,15 +21,12 @@ let isDragging = false
 
 let startX, startY
 let startLeft, startTop
-
-
-
 let eventNames = [
-        "dragstart",    // default: bloque fantasma
-        "contextmenu", 
-        "mousedown"     // default: seleccion azul para el texto
-    ]
-let allElements = document.querySelectorAll("#wrapper *")
+    "dragstart",    // default: bloque fantasma
+    "contextmenu",
+    "mousedown"     // default: seleccion azul para el texto
+]
+
 for (let elmt of allElements) {
     for (let evntNm of eventNames) {
         elmt.addEventListener(evntNm, (event) => {
@@ -37,13 +34,14 @@ for (let elmt of allElements) {
         })
     }
 }
-
 // window.addEventListener("resize", () => {
 //     // adjustPicHeight()
 // })
-
-const viewZoomPercent = document.getElementById("zoom_percent")
-const viewPicture = new View(document.getElementById("view_picture"));
+adjustPicHeight()
+input.addEventListener("change", () => {
+    index = 0
+    showPicture(index)
+})
 viewPicture.getElement().addEventListener("transitionstart", function () {
     const interval = setInterval(() => {
         showZoomInfo()
@@ -54,20 +52,14 @@ viewPicture.getElement().addEventListener("transitionstart", function () {
         showZoomInfo()
     }, { once: true })
 })
-
-const viewPicTitle = document.getElementById("picture_title")
 viewPicTitle.addEventListener("selectionstart", (event) => {
     alert("seletion")
     event.preventDefault()
 })
-
-const btnNext = document.getElementById("btn_next")
-const btnPrev = document.getElementById("btn_previous")
-
-btnNext.addEventListener("click", () => {
+btnNextSpace.addEventListener("click", () => {
     showNextPicture()
 })
-btnPrev.addEventListener("click", function () {
+btnPrevSpace.addEventListener("click", function () {
     showPrevPicture()
 })
 
@@ -82,46 +74,36 @@ btnPrev.addEventListener("click", function () {
 /*
     manipulating image
 */
-
-const menuBar = document.getElementById("menu_bar")
-const footerBar = document.getElementById("footer_bar")
-const btnFullscreen = document.getElementById("btn_fullscreen")
-
 btnFullscreen.addEventListener("click", function () {
     if (viewPicture.isOverflowHidden()) {
         hideBars()
     }
 })
 document.addEventListener("keydown", function (eDown) {
-    if (!viewPicture.isOverflowHidden()) {
+    if (!viewframePic.isOverflowHidden()) {
         if (eDown.key == "Escape") {
             showBars()
         }
     }
 })
 
-const btnRotatePic = document.getElementById("btn_rotate")
 btnRotatePic.addEventListener("click", function () {
     factor = 90
     angle = viewPicture.getRotation() + factor
     rotatePicRight(angle)
 })
 
-const btnZoomIn = document.getElementById("btn_zoom_in")
-const btnZoomOut = document.getElementById("btn_zoom_out")
-const btnZoomFit = document.getElementById("btn_zoom_fit")
-
 btnZoomIn.addEventListener("click", zoomIn)
 btnZoomOut.addEventListener("click", zoomOut)
-btnZoomFit.addEventListener("click", function () {    
+btnZoomFit.addEventListener("click", function () {
     // let left = parseFloat(viewPicture.style.left.replace("px", ""))
     // let top = parseFloat(viewPicture.style.top.replace("px", ""))
     // viewPicture.setTranslation(-left, -top )
-    viewPicture.setDefault("all")    
-    // let interval = setInterval((), )setTimeout(() => {        
-        viewPicture.style.top = 0
-        viewPicture.style.left = 0
-    // }, 1000) 
+    viewPicture.setDefault("all")
+    // let interval = setInterval(() => {        
+    viewPicture.style.top = 0
+    viewPicture.style.left = 0
+    // }, 1000)     
     showZoomInfo()
     // zoom = 1
     // viewPicture.style.scale = zoom
@@ -133,7 +115,7 @@ btnZoomFit.addEventListener("click", function () {
 /*
     zooming in/out image with the mouse wheel
 */
-const framePic = document.getElementById("frame_picture")
+
 framePic.addEventListener("wheel", function (event) {
     if (event.deltaY < 0) {
         zoomIn()
@@ -144,7 +126,7 @@ framePic.addEventListener("wheel", function (event) {
 /*
     Moving image
 */
-let transitionSaved
+
 framePic.addEventListener("mousedown", function (eCursor) {
     isDragging = true
     startX = eCursor.clientX
@@ -164,17 +146,13 @@ framePic.addEventListener("mousemove", function (eCursor) {
         let distY = startY - eCursor.clientY
 
         viewPicture.style.left = startLeft - distX + "px"
-        viewPicture.style.top = startTop - distY + "px"        
+        viewPicture.style.top = startTop - distY + "px"
     }
 })
 framePic.addEventListener("mouseup", function () {
     isDragging = false
 })
 
-
-
-const btnHeart = document.getElementById("btn_heart")
-const btnHeartImg = document.querySelector("#btn_heart img")
 btnHeart.addEventListener("click", function () {
     if (btnHeartImg.src.includes("/src/icons/heart_empty_white_1.png")) {
         btnHeartImg.src = "./src/icons/heart_full_white_0.png"
@@ -183,8 +161,4 @@ btnHeart.addEventListener("click", function () {
     }
 })
 
-const input = document.getElementById("input_pics")
-input.addEventListener("change", () => {
-    index = 0
-    showPicture(index)
-})
+
