@@ -17,7 +17,11 @@ let maxHeight = 0
 let startX, startY
 let startLeft, startTop
 
-let eventNames = ["selectionstart", "dragstart", "contextmenu"]
+let eventNames = [
+        "dragstart",    // default: bloque fantasma
+        "contextmenu", 
+        "mousedown"     // default: seleccion azul para el texto
+    ]
 let allElements = document.querySelectorAll("#wrapper *")
 for (let elmt of allElements) {
     for (let evntNm of eventNames) {
@@ -26,7 +30,6 @@ for (let elmt of allElements) {
         })
     }
 }
-
 
 window.addEventListener("resize", () => {
     // adjustPicHeight()
