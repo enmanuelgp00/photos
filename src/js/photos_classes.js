@@ -35,7 +35,13 @@ class View {
                 exist = true
             }
         }
-        if (!exist) fun.push(funToAdd)
+        if (!exist) {
+            if(funToAddName == "translate") {
+                fun.unshift(funToAdd)
+            } else {
+                fun.push(funToAdd)
+            }
+        } 
         fun = fun.join(" ")
         this.setTransformFun(fun)
     }

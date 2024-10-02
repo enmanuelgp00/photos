@@ -166,6 +166,7 @@ framePic.addEventListener("mousemove", function (eCursor) {
         
         // viewPicture.style.transform = transDefinition + " " + rotaDefinition
         viewPicture.setTranslation(posX, posY)
+        console.log(viewPicture.getTransformFun())
     }
 })
 framePic.addEventListener("mouseup", function () {
