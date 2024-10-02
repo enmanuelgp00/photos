@@ -5,58 +5,65 @@
     <title>Photos</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/css/photos.css">
-    <script src="./src/js/photos.js" defer></script>
+    <link rel="stylesheet" href="./src/css/photos_style.css">
+    <!-- <link rel="stylesheet" href="./src/css/magin.css"> -->
+    <script src="./src/js/photos_classes.js"></script>
+    <script src="./src/js/photos_main.js" defer></script>
+    <!-- <script type="module" src="./src/js/photos.js" defer></script> -->
 </head>
 
 <body>
     <div id="wrapper">
-        <div id="menu_bar">
+
+
+        <header id="menu_bar">
             <div id="menu_file">
-                <div class="center_content" id="frame_input_pics">
                     <input id="input_pics" type="file" class="hidden" multiple>
-                    <label id="btn_input_pics" class="icon_small" for="input_pics" >
+                    <label id="frame_input_pics" class="center_content" for="input_pics" >
                         <img class="icon_small" src="./src/icons/gallery_white_0.png" alt="input_pics">
                     </label>
-                </div>
+                
                 <span id="picture_title">Owl</span>
             </div>
             <div id="menu_options" class="center_content">
-                <div class="button_background center_content">
-                    <img id="btn_pic_edit" class="icon_small" src="./src/icons/pic_edit_0.png" alt="btn_pic_edit">
+                <div id="btn_pic_edit" class="button_background center_content">
+                    <img class="icon_small" src="./src/icons/pic_edit_0.png" alt="btn_pic_edit">
                 </div>
-                <div class="button_background center_content">
-                    <img id="btn_rotate" class="icon_small" src="./src/icons/rotate_0.png" alt="btn_rotate">
+                <div id="btn_rotate" class="button_background center_content">
+                    <img  class="icon_small" src="./src/icons/rotate_0.png" alt="btn_rotate">
                 </div>
-                <div class="button_background center_content">
-                    <img id="btn_trash_can" class="icon_small" src="./src/icons/trash_can_white_0.png" alt="btn_trash_can">
+                <div id="btn_trash_can" class="button_background center_content">
+                    <img class="icon_small" src="./src/icons/trash_can_white_0.png" alt="btn_trash_can">
                 </div>
-                <div class="button_background center_content">
-                    <img id="btn_heart_empty" class="icon_small" src="./src/icons/heart_empty_white_1.png" alt="btn_heart_empty">
+                <div id="btn_heart" class="button_background center_content">
+                    <img class="icon_small" src="./src/icons/heart_empty_white_1.png" alt="btn_heart_empty">
                 </div>
-                <div class="button_background center_content">
-                    <img id="btn_info_white" class="icon_small" src="./src/icons/info_white_0.png" alt="btn_info_white">
+                <div id="btn_info_white" class="button_background center_content">
+                    <img class="icon_small" src="./src/icons/info_white_0.png" alt="btn_info_white">
                 </div>
-                <div class="button_background center_content">
-                    <img id="btn_print_white" class="icon_small" src="./src/icons/print_white_0.png" alt="btn_print_white">
+                <div id="btn_print_white" class="button_background center_content">
+                    <img class="icon_small" src="./src/icons/print_white_0.png" alt="btn_print_white">
                 </div>
             </div>
             <div id="frame_window_controls">
-                <div id="frame_btn_maxi_mini" class="center_content">
-                    <img id="btn_maxi_mini"  alt="cls" src="./src/icons/minimize_0.png">
+                <div id="btn_maxi_mini" class="center_content">
+                    <img alt="cls" src="./src/icons/minimize_0.png">
                 </div>
-                <div id="frame_btn_close" class="center_content">
-                    <img id="btn_close"  alt="cls" src="./src/icons/close_0.png">
+                <div id="btn_close" class="center_content">
+                    <img alt="cls" src="./src/icons/close_0.png">
                 </div>
             </div>
+        </header>
 
-        </div>
-        <div id="frame_picture">
-            <img id="picture" src="./src/img/owl.jpg" alt="error loading image">
+
+
+
+        <section id="frame_picture">
+            <img id="view_picture" src="./src/img/owl.jpg" alt="error loading image">
             <!-- <img id="btn_hide" class="button_background" src="./src/icons/show.png" alt="btn_hide"> -->
             <!-- <img id="btn_menu_shift" src="./src/icons/shift.png" alt="Shf">  -->
-        </div>
-        <div id="controls">
+        </section>
+        <section id="controls">
             <div class="visibleOnHover">
                 <div id="btn_previous">
                     <img class="icon_smaller" src="./src/icons/arrow_left_white_0.png" alt="Previous">
@@ -67,8 +74,12 @@
                     <img class="icon_smaller" src="./src/icons/arrow_right_white_0.png" alt="Next">
                 </div>
             </div>
-        </div>
-        <div id="footer_bar">
+        </section>
+
+
+
+
+        <footer id="footer_bar">
             <div class="center_content">
                 <div class="button_background center_content">
                     <img id="btn_filmstrip" class="icon_smaller" src="./src/icons/filmstrip_white_0.png" alt="Fit">
@@ -94,7 +105,7 @@
                     <img class="icon_smaller" src="./src/icons/fullscreen_white_0.png" alt="Fit">
                 </div>
             </div>
-        </div>
+        </footer>
     </div>
 </body>
 <!-- 

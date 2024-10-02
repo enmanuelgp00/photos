@@ -1,9 +1,10 @@
 * {
     margin: 0;
 }
-main, body {
+html, body {
     overflow: hidden;
-    height: 100vh;    
+    height: 100vh;        
+    min-width: 500px;
     color: white;
     background-color: rgb(31, 31, 31); 
     font-family: ink free, courier new;
@@ -23,8 +24,7 @@ main, body {
 
 #menu_bar {
     display: flex;
-    position: relative;        
-    z-index: 2;
+    position: relative;   
     
     justify-content: space-between;
     align-items: flex-start;
@@ -34,6 +34,7 @@ main, body {
     width: 100%;
     transition: transform 1.0s ease;
     background-color: rgb(31, 31, 31); 
+    z-index: 1;
 }
 #menu_file {
     display: flex;
@@ -43,7 +44,6 @@ main, body {
 #picture_title {
     color: white;
     font-size: small;
-    
     margin-left: 10px;
 }
 #frame_input_pics {  
@@ -59,7 +59,14 @@ main, body {
     cursor: pointer;
 }
 #menu_options {
+    position: absolute;
+    width: 100%;
     height: 100%;
+    visibility: hidden;
+}
+
+#menu_options * {
+    visibility: visible;
 }
 #frame_window_controls {
     display: flex;
@@ -67,16 +74,16 @@ main, body {
     align-items: flex-start;
 } 
 #frame_window_controls div {
-    height: 30px;
     width: 40px;    
+    height: 30px;
 }
 #frame_window_controls div img {
     height: 10px;
 }
-#frame_btn_maxi_mini:hover {
+#btn_maxi_mini:hover {
     background-color: rgba(100, 100, 100, 0.3);
 }
-#frame_btn_close:hover {
+#btn_close:hover {
     background-color: rgba(255, 0, 0, 0.7);
 }
 
@@ -85,24 +92,26 @@ main, body {
 */
 
 #frame_picture {
-
-    position: relative;
     box-sizing: border-box;
-    flex-grow: 1;
+    /* flex-grow: 1; */
+    height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: visible;
+    overflow: hidden;
+    /* overflow: visible; */
 
      /* moved to the background*/
     z-index: 0;
 }
-#picture {
+#view_picture {
+    /* visibility: hidden; */
     position: relative;
-    box-sizing: border-box;   
+    box-sizing: border-box;  
+    max-height: 100%; /*combined with overflow: hidden; on its parent element, allows it to adjust its size to the initial size of the parent*/
     max-width: 100%;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, scale 0.5s ease;
 }
 /*
   footer bar
@@ -119,8 +128,7 @@ main, body {
     width: 100%;
     background-color: rgb(39, 39, 39);     
     transition: transform 1.0s ease;
-    
-    z-index: 1;
+    z-index: 2;
 }
 #footer_options {
     display: flex;
