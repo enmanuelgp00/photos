@@ -1,21 +1,7 @@
 
-function adjustPicHeight() {
-    //let height = framePic.parentNode.clientHeight - (footerBar.clientHeight + menuBar.clientHeight)
-    //let height = framePic.parentNode.offsetHeight - (footerBar.offsetHeight + menuBar.offsetHeight)
-    //let height = framePic.parentNode.getBoundingClientRect().height - (footerBar.getBoundingClientRect().height + menuBar.getBoundingClientRect().height)
-    // let maxHeight
-    // let parentHeight = picture.parentNode.getBoundingClientRect().height
-    //  if (picture.style.height >= parentHeight ) {
-    //     if (isHidden){
-    //         maxHeight = parentHeight - 90
-    //     } else {
-    //         maxHeight = parentHeight 
-    //     }
-    //  }
+function adjustPicHeight() {    
     let maxHeight = viewframePic.getStyle().height
-    viewPicture.style.height = maxHeight
-    console.log(maxHeight)
-    console.log(viewPicture.style.height)
+    viewPicture.style.maxHeight = maxHeight
 }
 
 
@@ -58,12 +44,13 @@ function hideBars() {
     footerBar.style.transform = "translateY(40px)"
     menuBar.style.transform = "translateY(-50px)"
     framePic.style.overflow = "visible"
-    // viewPicture.setOverflow("visible")
+    btnShift.style.opacity = 0.5
 }
 function showBars() {
     footerBar.style.transform = "translateY(0px)"
     menuBar.style.transform = "translateY(0px)"
     viewPicture.setOverflow("hidden")
+    btnShift.style.opacity = 1
 }
 
 function rotatePicRight(deg) {
@@ -137,14 +124,16 @@ function setZoom(zoom) {
     viewPicture.style.scale = zoom
 }
 function zoomIn() {
-    setZoom(getZoom() + 0.5)
+    let factor = 0.2
+    setZoom(getZoom() + factor)
     // showZoomInfo()
 }
 function zoomOut() {
-    if (getZoom() - 0.5 > 0.5) {
-        setZoom(getZoom() - 0.5)
+    let factor = 0.2
+    if (getZoom() - factor > factor) {
+        setZoom(getZoom() - factor)
     } else {
-        setZoom(0.5)
+        setZoom(factor)
     }
     // showZoomInfo()
 }

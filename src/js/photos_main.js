@@ -18,8 +18,6 @@ let files = new Array()
 
 let isDragging = false
 // let maxHeight = 0
-
-let startX, startY
 let startLeft, startTop
 let eventNames = [
     "dragstart",    // default: bloque fantasma
@@ -63,12 +61,15 @@ btnPrevSpace.addEventListener("click", function () {
     showPrevPicture()
 })
 
-// const btnShift = document.getElementById("btn_menu_shift")
-// btnShift.addEventListener("click", function () {
-//     showRandomPic()
-// })
-
-// listening to ESC button to close fullscreen mode
+btnShift.addEventListener("click", function () {
+    showRandomPic()
+})
+btnShift.addEventListener("mouseover", ()=>{
+    btnShift.querySelector("img").style.transform = "rotate(180deg)"
+})
+btnShift.addEventListener("mouseout", ()=>{
+    btnShift.querySelector("img").style.transform = "rotate(0deg)"
+})
 
 
 /*
@@ -126,32 +127,64 @@ framePic.addEventListener("wheel", function (event) {
 /*
     Moving image
 */
-
+let startX, startY
+let transX, transY
 framePic.addEventListener("mousedown", function (eCursor) {
     isDragging = true
     startX = eCursor.clientX
     startY = eCursor.clientY
-
+    viewPicture.hideTransition("transform")
+    viewPicture.style.transition = "none"
     /*
     I could only modify the position of top and left, I was using getBoundingClientRect(), which returns the values ​​of X and Y, but not the position in correspondence top and left, then using .style.left this returned a string
-    */
+    
     startLeft = viewPicture.style.left
     startTop = viewPicture.style.top
     startLeft = startLeft.replace("px", "")
     startTop = startTop.replace("px", "")
+    */
+
+    transX = viewPicture.getTranslationX()
+    transY = viewPicture.getTranslationY()
+
+    btnNextSpace.style.visibility = "hidden"
+    btnPrevSpace.style.visibility = "hidden"
+    btnNextSpace.querySelector("div").style.visibility = "hidden"
+    btnPrevSpace.querySelector("div").style.visibility = "hidden"
 })
 framePic.addEventListener("mousemove", function (eCursor) {
     if (isDragging) {
         let distX = startX - eCursor.clientX
         let distY = startY - eCursor.clientY
-
-        viewPicture.style.left = startLeft - distX + "px"
-        viewPicture.style.top = startTop - distY + "px"
+        let posX = transX - distX
+        let posY = transY - distY
+        // let rotaDefinition  = "rotate("+ viewPicture.getRotation() +"deg)"        
+        // let transDefinition = "translate("+ posX +"px, "+ posY +"px)"
+        // viewPicture.style.left = startLeft - distX + "px"
+        // viewPicture.style.top = startTop - distY + "px"
+        
+        
+        // viewPicture.style.transform = transDefinition + " " + rotaDefinition
+        viewPicture.setTranslation(posX, posY)
     }
 })
 framePic.addEventListener("mouseup", function () {
+    viewPicture.showTransition()
+    
+    btnNextSpace.style.visibility = "visible"
+    btnPrevSpace.style.visibility = "visible"
     isDragging = false
 })
+framePic.addEventListener("mouseout", function () {
+    
+    btnNextSpace.style.visibility = "visible"
+    btnPrevSpace.style.visibility = "visible"
+    btnNextSpace.querySelector("div").style.visibility = "visible"
+    btnPrevSpace.querySelector("div").style.visibility = "visible"
+    viewPicture.showTransition()
+    isDragging = false
+})
+
 
 btnHeart.addEventListener("click", function () {
     if (btnHeartImg.src.includes("/src/icons/heart_empty_white_1.png")) {
@@ -161,4 +194,6 @@ btnHeart.addEventListener("click", function () {
     }
 })
 
-
+btnTrashCan.addEventListener("click", () => {
+    window.open(picture.getURL())
+}) 

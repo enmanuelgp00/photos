@@ -98,6 +98,7 @@ html, body {
 #frame_picture {
     box-sizing: border-box;
     /* flex-grow: 1; */
+    position: relative;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -162,8 +163,8 @@ html, body {
     display: flex;
     position: relative;
     align-items: center;
-    height: 200px;
-    width: 100px;
+    height: 100px;
+    width: 50px;
     visibility: visible;
 }
 #arrow_controls div div {
@@ -171,7 +172,7 @@ html, body {
     width: 20px;
     background-color: rgb(39, 39, 39);
     border-radius: 5px;
-    visibility: visible;
+    /* visibility: visible; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -186,11 +187,10 @@ html, body {
 }
 #btn_previous {
     margin-left: 7px;
-    left: 0;
 }
 #btn_next {
     margin-right: 7px;
-    right: 0;
+    left: 20px;
 }
 
 #btn_hide {
@@ -201,18 +201,19 @@ html, body {
     left: 0;
     bottom: 0;
 }
-#btn_menu_shift {        
+#btn_shift {        
     cursor: pointer;
     margin-right: 10px;
     margin-bottom: 10px;
     /* height: 40px; */
     position: absolute;
     right: 0;
-    bottom: 0;
-    transition: transform 0.5s ease;
+    top: -45px;
+    visibility: visible;
+    transform: opacity 0.5s ease;
 }
-#btn_menu_shift:hover {
-    transform: rotate(180deg);
+#btn_shift img {
+    transition: transform 0.5s ease;
 }
 /*
     class 
@@ -256,10 +257,17 @@ html, body {
     align-items: center;   
 }
 .icon_smaller {
-    height: 14px;
+    max-width: 14px;
+    max-height: 14px;
+
 }
 .icon_small {
-    height: 16px;
+    max-width: 16px;
+    max-height: 16px;
+}
+.icon_tini {
+    max-width: 18px;
+    max-height: 18px;
 }
 .horizontal_line {
     height: 23px;

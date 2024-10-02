@@ -1,6 +1,7 @@
 const input = document.getElementById("input_pics")
 
 const viewZoomPercent = document.getElementById("zoom_percent")
+let picture;
 const viewPicture = new View(document.getElementById("view_picture"))
 const viewframePic = new View(document.getElementById("frame_picture"))
 framePic = viewframePic.getElement()
@@ -20,5 +21,6 @@ const btnZoomOut = document.getElementById("btn_zoom_out")
 const btnZoomFit = document.getElementById("btn_zoom_fit")
 const btnHeart = document.getElementById("btn_heart")
 const btnHeartImg = document.querySelector("#btn_heart img")
-
+const btnShift = document.getElementById("btn_shift")
+const btnTrashCan = document.getElementById("btn_trash_can")
 let allElements = document.querySelectorAll("#wrapper *")

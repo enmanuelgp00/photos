@@ -4,8 +4,7 @@ class Picture {
         this.name = file.name
     }
     getURL() { return this.URL }
-    getName() { return this.name }
-
+    getName() { return this.name }    
 
 }
 
@@ -14,11 +13,55 @@ class View {
         this.element = element
         this.style = this.element.style
         this.matrix = this.getTransformMatrix()
-        this.rotation = Math.round(Math.atan2(this.matrix[1], this.matrix[0]) * (180/Math.PI))
+        this.transition = this.getTransition()
+        this.rotation = Math.round(Math.atan2(this.matrix[1], this.matrix[0]) * (180 / Math.PI))
+    }
+    getTransformFun() {
+        let fun = this.style.transform
+        return fun
+    }
+    setTransformFun(fun) {
+        this.style.transform = fun
+    }
+    addTransformFun(funToAdd) {
+        let exist = false
+        let fun = this.getTransformFun().split(")").filter(el => el != "")
+        fun = fun.map((fn) => fn + ")") // note: if you use brackets "{}" you need to define "return fn + ")" "
+
+        let funToAddName = funToAdd.split("(")[0]
+        for (let id in fun) {
+            if (fun[id].includes(funToAddName)) {
+                fun[id] = funToAdd
+                exist = true
+            }
+        }
+        if (!exist) fun.push(funToAdd)
+        fun = fun.join(" ")
+        this.setTransformFun(fun)
+    }
+    getTransition() {
+        let trans = this.getStyle().transition
+        return trans
+    }
+    setTransition(newTrans) {
+        this.transition = newTrans
+        this.style.transition = this.transition
+    }
+    showTransition() {
+        this.setTransition(this.transition)
+    }
+    hideTransition(transToHide) {
+        let trans = this.getTransition().split(",")
+        let transToHideName = transToHide.split(")")[0]
+        trans = trans.map((t) => {
+            return (t.includes(transToHideName)) ? "" : t
+        })
+        trans = trans.filter(Boolean).join(", ")
+        this.style.transition = trans
     }
     getStyle() {
         return window.getComputedStyle(this.element)
-    }    
+    }
     isHidden() {
         if (this.getStyle().visibility == "hidden") {
             return true
@@ -29,7 +72,7 @@ class View {
     setVisibility(visibility) {
         this.style.visibility = visibility
     }
-    getTransformMatrix(){
+    getTransformMatrix() {
         let matrix = this.getStyle().getPropertyValue("transform")
         return (matrix != 'none') ? matrix.split("(")[1].split(")")[0].split(",") : [1, 0, 0, 1, 0, 0]// new Array(6).fill(0)
     }
@@ -39,18 +82,18 @@ class View {
     setScale(scale) {
         this.style.scale = scale
     }
-    setDefault(def, skip){
-        switch (def){
-            case "all"  :
-            case "scale": 
-                if(skip != "scale") this.setScale(1)
-                if(def  != "all"  ) break            
-            case "rotation": 
-                if(skip != "rotation") this.setRotation(0)
-                if(def != "all"      ) break 
-            case "translation" :
-                if(skip != "translation") this.setTranslation(0, 0)
-                if(def != "all"      ) break 
+    setDefault(def, skip) {
+        switch (def) {
+            case "all":
+            case "scale":
+                if (skip != "scale") this.setScale(1)
+                if (def != "all") break
+            case "rotation":
+                if (skip != "rotation") this.setRotation(0)
+                if (def != "all") break
+            case "translation":
+                if (skip != "translation") this.setTranslation(0, 0)
+                if (def != "all") break
 
         }
     }
@@ -68,37 +111,42 @@ class View {
     }
     setRotation(deg) {
         this.rotation = deg
-        this.style.transform = "rotate("+ this.rotation +"deg)"        
+        this.addTransformFun("rotate(" + this.rotation + "deg)")
     }
-    getElement(){
+    requestRotation(deg) {
+        if(deg != this.rotation) {
+            
+        }
+    }
+    getElement() {
         return this.element
     }
-    getOverflow(){
+    getOverflow() {
         return this.getStyle().overflow
     }
-    setOverflow(status){
+    setOverflow(status) {
         this.style.overflow = status
     }
-    isOverflowHidden(){
+    isOverflowHidden() {
         return this.getOverflow() == "hidden" || this.getOverflow() == "clip"
     }
-    getTranslationX(){
+    getTranslationX() {
         return this.getTransformMatrix()[4]
     }
-    setTranslationX(x){
+    setTranslationX(x) {
         this.style.transform = "translateX(" + x + "px)"
     }
-    getTranslationY(){
+    getTranslationY() {
         return this.getTransformMatrix()[5]
     }
-    setTranslationY(y){
+    setTranslationY(y) {
         this.style.transform = "translateY(" + y + "px)"
     }
-    setTranslation(x , y) {
-        this.style.transform = "translate("+ x +"px, "+ y +"px)"
+    setTranslation(x, y) {
+        this.addTransformFun("translate(" + x + "px, " + y + "px)")
     }
 }
-function popUpMessage(element, message){
+function popUpMessage(element, message) {
     let popup = document.createElement("div")
     popup.style.position = "absolute"
     popup.innerHTML = message
