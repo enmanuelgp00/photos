@@ -64,7 +64,7 @@ function showBars() {
     console.log(viewPicture.getOverflow())
 }
 
-function rotatePic(deg) {
+function rotatePicRight(deg) {
     // rotation = deg
     // viewPicture.style.transform = "rotate(" + rotation + "deg)"
     // if (deg == 360) {
@@ -82,6 +82,27 @@ function rotatePic(deg) {
     // } else {
 
     viewPicture.setRotation(deg)
+    // }
+}
+
+function rotatePicLeft(deg) {
+    // rotation = deg
+    // viewPicture.style.transform = "rotate(" + rotation + "deg)"
+    // if (deg == 360) {
+    //     transition = viewPicture.getStyle().transition
+    //     rotationR().then(console.log("done"))
+    //     viewPicture.setRotation(deg)
+    //     viewPicture.setRotation(15)
+
+
+    //     viewPicture.style.transition = transition
+
+    //     //quitar tranciion de rotacion
+    //     //rotas al valor predeterminado
+    //     //activas trancicion de rotacion
+    // } else {
+
+    viewPicture.setRotation(deg * -1)
     // }
 }
 function rotationR() {
@@ -118,8 +139,10 @@ function zoomIn() {
     // showZoomInfo()
 }
 function zoomOut() {
-    if (getZoom() > 0.5) {
+    if (getZoom() - 0.5 > 0.5) {
         setZoom(getZoom() - 0.5)
+    } else {
+        setZoom(0.5)
     }
     // showZoomInfo()
 }
