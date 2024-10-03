@@ -1,43 +1,54 @@
 
 function adjustPicHeight() {    
     let maxHeight = viewframePic.getStyle().height
-    viewPicture.style.maxHeight = maxHeight
+    viewMedia.style.maxHeight = maxHeight
+}
+function getMediaFiles(){
+    return inputMedia.files
 }
 
+function showMedia(num) {
+    if (getMediaFiles().length != 0) {
 
-function showPicture(num) {
-    if (input.files != 0) {
-        files = input.files
-        picture = new Picture(files[num])
-        // let file = files[num]
-        // viewPicture.src = URL.createObjectURL(file)
-        viewPicture.getElement().src = picture.getURL()        
+        // document.body.style.cursor = "wait"
+        // viewMedia.style.cursor = "wait"
+
+        media = new Media(getMediaFiles()[num])
+        viewMedia.getElement().src = media.getURL()        
+        // viewMedia.getElement().onload = () => {
+        //     document.body.style.cursor = "default"
+        //     viewMedia.style.cursor = "pointer"
+        // }
         adjustPicHeight()
-        showPicTitle(picture.getName())
+        showPicTitle(media.getName())
+    } else {
+        viewMedia.getElement().src = defaultMedia.url        
+        adjustPicHeight()
+        showPicTitle(defaultMedia.name)
     }
 }
 function showRandomPic() {
-    index = (Math.floor(Math.random() * 10000)) % files.length
-    showPicture(index)
+    index = (Math.floor(Math.random() * 10000)) % getMediaFiles().length
+    showMedia(index)
 }
 function showPicTitle(name) {
     viewPicTitle.innerHTML = name
 }
-function showNextPicture() {
-    if (index == input.files.length - 1) {
+function showNextMedia() {
+    if (index == getMediaFiles().length - 1) {
         index = 0
     } else {
         index++
     }
-    showPicture(index)
+    showMedia(index)
 }
-function showPrevPicture() {
+function showPrevMedia() {
     if (index == 0) {
-        index = input.files.length - 1
+        index = getMediaFiles().length - 1
     } else {
         index--
     }
-    showPicture(index)
+    showMedia(index)
 }
 
 function hideBars() {
@@ -49,84 +60,25 @@ function hideBars() {
 function showBars() {
     footerBar.style.transform = "translateY(0px)"
     menuBar.style.transform = "translateY(0px)"
-    viewPicture.setOverflow("hidden")
+    viewMedia.setOverflow("hidden")
     btnShift.style.opacity = 1
 }
 
 function rotatePicRight(deg) {
-    // rotation = deg
-    // viewPicture.style.transform = "rotate(" + rotation + "deg)"
-    // if (deg == 360) {
-    //     transition = viewPicture.getStyle().transition
-    //     rotationR().then(console.log("done"))
-    //     viewPicture.setRotation(deg)
-    //     viewPicture.setRotation(15)
-
-
-    //     viewPicture.style.transition = transition
-
-    //     //quitar tranciion de rotacion
-    //     //rotas al valor predeterminado
-    //     //activas trancicion de rotacion
-    // } else {
-
-    viewPicture.setRotation(deg)
-    // }
+    viewMedia.setRotation(deg)
 }
-
 function rotatePicLeft(deg) {
-    // rotation = deg
-    // viewPicture.style.transform = "rotate(" + rotation + "deg)"
-    // if (deg == 360) {
-    //     transition = viewPicture.getStyle().transition
-    //     rotationR().then(console.log("done"))
-    //     viewPicture.setRotation(deg)
-    //     viewPicture.setRotation(15)
-
-
-    //     viewPicture.style.transition = transition
-
-    //     //quitar tranciion de rotacion
-    //     //rotas al valor predeterminado
-    //     //activas trancicion de rotacion
-    // } else {
-
-    viewPicture.setRotation(deg * -1)
-    // }
+    viewMedia.setRotation(deg * -1)
 }
-function rotationR() {
-    return new Promise((resolve) => {
-
-        viewPicture.style.transition = "transform 0.0s ease"
-        setTimeout(() => {
-
-            resolve()
-        }, 1000)
-
-    })
-}
-function rotationA() {
-    return new Promise((resolve) => {
-
-        viewPicture.setRotation(deg)
-        viewPicture.style.transition = "transform 0.0s ease"
-        setTimeout(() => {
-            resolve()
-        }, 500)
-
-    })
-}
-
 function getZoom() {
-    return viewPicture.getScale()
+    return viewMedia.getScale()
 }
 function setZoom(zoom) {
-    viewPicture.style.scale = zoom
+    viewMedia.style.scale = zoom
 }
 function zoomIn() {
     let factor = 0.2
     setZoom(getZoom() + factor)
-    // showZoomInfo()
 }
 function zoomOut() {
     let factor = 0.2
@@ -135,11 +87,24 @@ function zoomOut() {
     } else {
         setZoom(factor)
     }
-    // showZoomInfo()
+}
+function zoomFit () {
+    viewMedia.setDefault("all")
+    viewMedia.style.top = 0
+    viewMedia.style.left = 0
+    showZoomInfo()
+
 }
 function showZoomInfo() {
-    // setTimeout(()=>{
     viewZoomPercent.innerHTML = (getZoom() * 100).toFixed(0) + "%"
-    // }, 500)
-
+}
+function showAndHide(element, duration) {
+    element.style.opacity = 1
+    setTimeout(() => { 
+        element.style.opacity = 0
+    }, duration)
+}
+function cleanMediaFiles() {
+   inputMedia.value = ""
+//    inputForm.reset()  another way
 }

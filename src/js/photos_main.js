@@ -1,23 +1,12 @@
-// import {Picture} from "./classes.js";
-
-
-
-// console.log(window.innerWidth)
-// allow picture to resize setting the picture frame in to the window
 /*
-    work on
-    zoom in out on move hover 
-        it means that we should we top left movement and zoom
+    * cursor whait while loading media
+    * 
 
-    
 */
-
-
 let index = 0
-let files = new Array()
-
+let viewPicImg = viewMedia.getElement()
+let defaultMedia = {name:"Gallery", url:viewPicImg.src}
 let isDragging = false
-// let maxHeight = 0
 let startLeft, startTop
 let eventNames = [
     "dragstart",    // default: bloque fantasma
@@ -35,39 +24,45 @@ for (let elmt of allElements) {
 // window.addEventListener("resize", () => {
 //     // adjustPicHeight()
 // })
+showAndHide(btnNextSpace, 2000)
+showAndHide(btnPrevSpace, 2000)
 adjustPicHeight()
-input.addEventListener("change", () => {
+
+inputMedia.addEventListener("change", () => {
     index = 0
-    showPicture(index)
+    showMedia(index)
 })
-viewPicture.getElement().addEventListener("transitionstart", function () {
+
+// keep showing the zoom info until the transition ends
+
+viewPicImg.addEventListener("transitionstart", function () {
     const interval = setInterval(() => {
         showZoomInfo()
     }, 100)
 
-    viewPicture.getElement().addEventListener("transitionend", function () {
+    viewPicImg.addEventListener("transitionend", function () {
         clearInterval(interval)
         showZoomInfo()
     }, { once: true })
 })
-viewPicTitle.addEventListener("selectionstart", (event) => {
-    alert("seletion")
-    event.preventDefault()
+viewPicImg.addEventListener("dblclick", () => {
+    inputMedia.click()
 })
+
 btnNextSpace.addEventListener("click", () => {
-    showNextPicture()
+    showNextMedia()
 })
 btnPrevSpace.addEventListener("click", function () {
-    showPrevPicture()
+    showPrevMedia()
 })
 
 btnShift.addEventListener("click", function () {
     showRandomPic()
 })
-btnShift.addEventListener("mouseover", ()=>{
+btnShift.addEventListener("mouseover", () => {
     btnShift.querySelector("img").style.transform = "rotate(180deg)"
 })
-btnShift.addEventListener("mouseout", ()=>{
+btnShift.addEventListener("mouseout", () => {
     btnShift.querySelector("img").style.transform = "rotate(0deg)"
 })
 
@@ -76,7 +71,7 @@ btnShift.addEventListener("mouseout", ()=>{
     manipulating image
 */
 btnFullscreen.addEventListener("click", function () {
-    if (viewPicture.isOverflowHidden()) {
+    if (viewMedia.isOverflowHidden()) {
         hideBars()
     }
 })
@@ -90,28 +85,13 @@ document.addEventListener("keydown", function (eDown) {
 
 btnRotatePic.addEventListener("click", function () {
     factor = 90
-    angle = viewPicture.getRotation() + factor
+    angle = viewMedia.getRotation() + factor
     rotatePicRight(angle)
 })
 
 btnZoomIn.addEventListener("click", zoomIn)
 btnZoomOut.addEventListener("click", zoomOut)
-btnZoomFit.addEventListener("click", function () {
-    // let left = parseFloat(viewPicture.style.left.replace("px", ""))
-    // let top = parseFloat(viewPicture.style.top.replace("px", ""))
-    // viewPicture.setTranslation(-left, -top )
-    viewPicture.setDefault("all")
-    // let interval = setInterval(() => {        
-    viewPicture.style.top = 0
-    viewPicture.style.left = 0
-    // }, 1000)     
-    showZoomInfo()
-    // zoom = 1
-    // viewPicture.style.scale = zoom
-    // rotation = 0
-    // viewPicture.style.transform = "rotate("+ rotation +"deg)"
-
-})
+btnZoomFit.addEventListener("click", zoomFit)
 
 /*
     zooming in/out image with the mouse wheel
@@ -133,19 +113,11 @@ framePic.addEventListener("mousedown", function (eCursor) {
     isDragging = true
     startX = eCursor.clientX
     startY = eCursor.clientY
-    viewPicture.hideTransition("transform")
-    viewPicture.style.transition = "none"
-    /*
-    I could only modify the position of top and left, I was using getBoundingClientRect(), which returns the values ​​of X and Y, but not the position in correspondence top and left, then using .style.left this returned a string
-    
-    startLeft = viewPicture.style.left
-    startTop = viewPicture.style.top
-    startLeft = startLeft.replace("px", "")
-    startTop = startTop.replace("px", "")
-    */
+    viewMedia.hideTransition("transform")
+    viewMedia.style.transition = "none"
 
-    transX = viewPicture.getTranslationX()
-    transY = viewPicture.getTranslationY()
+    transX = viewMedia.getTranslationX()
+    transY = viewMedia.getTranslationY()
 
     btnNextSpace.style.visibility = "hidden"
     btnPrevSpace.style.visibility = "hidden"
@@ -158,35 +130,27 @@ framePic.addEventListener("mousemove", function (eCursor) {
         let distY = startY - eCursor.clientY
         let posX = transX - distX
         let posY = transY - distY
-        // let rotaDefinition  = "rotate("+ viewPicture.getRotation() +"deg)"        
-        // let transDefinition = "translate("+ posX +"px, "+ posY +"px)"
-        // viewPicture.style.left = startLeft - distX + "px"
-        // viewPicture.style.top = startTop - distY + "px"
-        
-        
-        // viewPicture.style.transform = transDefinition + " " + rotaDefinition
-        viewPicture.setTranslation(posX, posY)
-        console.log(viewPicture.getTransformFun())
+        viewMedia.setTranslation(posX, posY)
     }
 })
 framePic.addEventListener("mouseup", function () {
-    viewPicture.showTransition()
-    
+    viewMedia.showTransition()
+
     btnNextSpace.style.visibility = "visible"
     btnPrevSpace.style.visibility = "visible"
     isDragging = false
 })
+
 framePic.addEventListener("mouseout", function () {
-    
     btnNextSpace.style.visibility = "visible"
     btnPrevSpace.style.visibility = "visible"
     btnNextSpace.querySelector("div").style.visibility = "visible"
     btnPrevSpace.querySelector("div").style.visibility = "visible"
-    viewPicture.showTransition()
+    viewMedia.showTransition()
     isDragging = false
 })
 
-
+// menu options
 btnHeart.addEventListener("click", function () {
     if (btnHeartImg.src.includes("/src/icons/heart_empty_white_1.png")) {
         btnHeartImg.src = "./src/icons/heart_full_white_0.png"
@@ -196,5 +160,11 @@ btnHeart.addEventListener("click", function () {
 })
 
 btnTrashCan.addEventListener("click", () => {
-    window.open(picture.getURL())
+    window.open(media.getURL())
 }) 
+
+btnClose.addEventListener("click", () => {
+    cleanMediaFiles()
+    showMedia(getMediaFiles())
+    zoomFit()
+})

@@ -1,0 +1,61 @@
+
+/*
+    class 
+*/
+.animation_grow {
+    transition: transform 0.1s ease;
+}
+.animation_grow:hover {
+    transform: scale(1.1);
+}
+.animation_grow:active {
+    transform: none;
+}
+.button_background {   
+    min-height: 29px;
+    min-width : 29px;
+    border-radius: 5px;
+    padding: 5px;
+}
+.button_background:hover {
+    cursor: pointer;
+    background-color: rgba(100, 100, 100, 0.3);
+    transition: background-color 0.3 ease;
+}
+.visibleOnHover {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.visibleOnHover:hover {
+    opacity: 1;
+}
+.hidden {
+    display: none;
+    /* position: absolute;
+    visibility: hidden; 
+    width: 0;
+    height: 0;*/
+}
+.center_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+.icon_smaller {
+    max-width: 14px;
+    max-height: 14px;
+
+}
+.icon_small {
+    max-width: 16px;
+    max-height: 16px;
+}
+.icon_tini {
+    max-width: 18px;
+    max-height: 18px;
+}
+.horizontal_line {
+    height: 23px;
+    width : 1px;
+    background-color: rgba(100, 100, 100, 0.5);
+}

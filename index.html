@@ -5,9 +5,10 @@
     <title>Photos</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/css/classes.css">
     <link rel="stylesheet" href="./src/css/photos_style.css">
-    <!-- <link rel="stylesheet" href="./src/css/magin.css"> -->     
-    <script src="./src/js/photos_classes.js"></script>
+    <!-- <link rel="stylesheet" href="./src/css/magin.css"> -->
+    <script src="./src/js/classes.js"></script>
     <script src="./src/js/photos_objects.js" defer></script>
     <script src="./src/js/photos_functions.js"></script>
     <script src="./src/js/photos_main.js" defer></script>
@@ -20,12 +21,11 @@
 
         <header id="menu_bar">
             <div id="menu_file">
-                <input id="input_pics" type="file" class="hidden" multiple>
-                <label id="frame_input_pics" class="center_content" for="input_pics">
+                <div id="frame_input_pics" class="center_content">
                     <img class="icon_small" src="./src/icons/gallery_white_0.png" alt="input_pics">
-                </label>
+                </div>
 
-                <span id="picture_title">Owl</span>
+                <span id="media_title">Gallery</span>
             </div>
             <div id="frame_menu_options" class="center_content">
                 <div id="menu_options" class="center_content">
@@ -65,10 +65,10 @@
 
 
 
-        <section id="frame_picture">
-            <img id="view_picture" src="./src/img/owl.jpg" alt="error loading image">
-            
-            </section>
+        <section id="frame_media">            
+            <input id="input_media" type="file" class="hidden" multiple>
+            <img id="view_media" src="./src/icons/gallery_white_2.png" alt="error loading image">
+        </section>
         <section id="arrow_controls">
             <div id="btn_previous_space" class="visibleOnHover">
                 <div id="btn_previous">
@@ -111,7 +111,7 @@
                     <img class="icon_smaller" src="./src/icons/fullscreen_white_0.png" alt="Fit">
                 </div>
                 <div id="btn_shift" class="center_content button_background">
-                    <img class="icon_tini" src="./src/icons/arrow_shift_white_1.png" alt="Shf"> 
+                    <img class="icon_tini" src="./src/icons/arrow_shift_white_1.png" alt="Shf">
                 </div>
             </div>
         </footer>

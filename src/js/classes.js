@@ -1,4 +1,4 @@
-class Picture {
+class Media {
     constructor(file) {
         this.URL = URL.createObjectURL(file)
         this.name = file.name
@@ -158,4 +158,4 @@ function popUpMessage(element, message) {
     popup.innerHTML = message
     element.appendChild(popup)
 }
-// export {Picture}
+// export {Media}
