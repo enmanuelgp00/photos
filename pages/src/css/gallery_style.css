@@ -1,0 +1,33 @@
+* {
+    margin: 0;    
+}
+html, body {
+    height: 100vh;
+    background-color: rgb(31, 31, 31);
+    color: white;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+#top_bar {
+    display: flex;
+    background-color: rgb(39, 39, 39);
+}
+
+#content {
+    display: flex;
+    flex-grow: 1;
+    
+}
+#aside_bar {
+    background-color: rgb(39, 39, 39);
+    display: flex;
+    flex-direction: column;
+}
+#about {
+
+}
+
+
