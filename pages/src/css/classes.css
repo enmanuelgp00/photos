@@ -59,3 +59,31 @@
     width : 1px;
     background-color: rgba(100, 100, 100, 0.5);
 }
+
+.btn_corner {  
+    cursor: pointer;    
+    height: 50px;
+    width : 50px;
+}
+.btn_corner:hover {
+    background-color: rgba(100, 100, 100, 0.3);
+}
+
+#frame_window_controls {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+} 
+#frame_window_controls div {
+    width: 40px;    
+    height: 30px;
+}
+#frame_window_controls div img {
+    height: 10px;
+}
+#btn_maxi_mini:hover {
+    background-color: rgba(100, 100, 100, 0.3);
+}
+#btn_close:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+}

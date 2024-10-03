@@ -124,6 +124,7 @@ framePic.addEventListener("mousedown", function (eCursor) {
     btnPrevSpace.style.visibility = "hidden"
     btnNextSpace.querySelector("div").style.visibility = "hidden"
     btnPrevSpace.querySelector("div").style.visibility = "hidden"
+    
 })
 framePic.addEventListener("mousemove", function (eCursor) {
     if (isDragging) {

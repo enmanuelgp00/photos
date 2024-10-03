@@ -46,15 +46,10 @@ html, body {
     font-size: small;
     margin-left: 10px;
 }
-#frame_input_pics {  
-    cursor: pointer;    
-    height: 50px;
-    width : 50px;
+#btn_page_gallery {    
     background-color: rgb(44, 44, 44);
 }
-#frame_input_pics:hover {
-    background-color: rgba(100, 100, 100, 0.3);
-}
+
 #btn_input_pics {
     cursor: pointer;
 }
@@ -72,25 +67,6 @@ html, body {
     background-color: rgb(31, 31, 31);
     box-shadow: -10px 0px 10px 0px rgb(31, 31, 31);
 }
-#frame_window_controls {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-} 
-#frame_window_controls div {
-    width: 40px;    
-    height: 30px;
-}
-#frame_window_controls div img {
-    height: 10px;
-}
-#btn_maxi_mini:hover {
-    background-color: rgba(100, 100, 100, 0.3);
-}
-#btn_close:hover {
-    background-color: rgba(255, 0, 0, 0.7);
-}
-
 /*
     frame_media
 */
