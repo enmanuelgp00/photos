@@ -1,6 +1,7 @@
 /*
     * cursor whait while loading media
-    * 
+    * Drag directly on image if cursor gets out of it, stops dragging
+    * Dinamic opacity in left and right browsing buttons
 
 */
 let index = 0
