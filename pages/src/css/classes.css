@@ -41,6 +41,9 @@
     justify-content: center;
     align-items: center;   
 }
+.icon_micro {
+    max-height: 10px;
+}
 .icon_smaller {
     max-width: 14px;
     max-height: 14px;
@@ -97,7 +100,9 @@
     flex-direction: column;
     align-items: center;
     background-color: rgb(39, 39, 39);
-    padding: 13px;
+    padding: 13px;    
+    border-top: 1px solid rgba(100, 100, 100, 0.3);
+    margin: 10px;
     border-radius: 5px;
     box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.5);
 }
@@ -116,4 +121,8 @@
 }
 .context_menu div img{
     margin-right: 7px;
+}
+.context_menu div:last-child {
+    margin-top: 6px;
+    border-top: 1px solid rgba(100, 100, 100, 0.3);
 }

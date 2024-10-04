@@ -201,8 +201,6 @@ framePic.addEventListener("contextmenu", (e) => {
     fMContextMenu.style.left = `${e.clientX - rect.left}px`
     fMContextMenu.style.top  = `${e.clientY - rect.top}px`
     fMContextMenu.style.display = "flex"
-    console.log(e.clientX)    
-    console.log(e.clientY)
 })
 btnFMContextMenu.addEventListener("click", () => {
     inputMedia.click()
