@@ -57,17 +57,38 @@ input[type="search"]:focus {
     
 }
 #aside_bar {
+    position: relative;
     background-color:rgb(31, 31, 31);
     width: 50px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    transition: width 0.7s ease;
 }
 #aside_bar .button_background {
     border-top: 1px solid rgba(100, 100, 100, 0.5);
-    /* width: 100%; */
     justify-content: center;
-    /* margin: 1px; */
+}
+#scroll {
+    position: absolute;
+    width: 5px;
+    height: 100%;
+    margin-left: 6px;
+}
+#scroll_pointer {
+    height: 10px;
+    background-color: rgb(118, 185, 237);
+    border-radius: 5px;
+}
+.groupBtn {
+    margin-left: 5px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+}
+.groupBtn span {
+    display: none;
+    text-wrap: nowrap;
+    margin-left: 3px;
 }
 #about {
     flex-grow: 1;
