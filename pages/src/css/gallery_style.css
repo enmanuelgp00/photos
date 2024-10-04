@@ -24,7 +24,8 @@ main {
     background-color: rgb(39, 39, 39);
     border-bottom: 1px solid rgba(100, 100, 100, 0.5);
     border-radius: 5px;
-    max-width: 500px;
+    max-width: 700px;
+    margin-right: 7px;
 }
 #wrapper_input_search:hover {
     background-color: rgba(100, 100, 100, 0.3);
@@ -64,11 +65,15 @@ input[type="search"]:focus {
 }
 #aside_bar .button_background {
     border-top: 1px solid rgba(100, 100, 100, 0.5);
+    /* width: 100%; */
+    justify-content: center;
+    /* margin: 1px; */
 }
 #about {
     flex-grow: 1;
     background-color: rgb(39, 39, 39);
     border-radius: 10px 0px 0px 0px;
+    border: none;
 }
 
 

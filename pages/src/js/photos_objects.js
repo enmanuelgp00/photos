@@ -25,6 +25,8 @@ const btnTrashCan = document.getElementById("btn_trash_can")
 
 // frame
 const btnShift = document.getElementById("btn_shift")
+const fMContextMenu = document.getElementById("frame_media_context_menu")
+const btnFMContextMenu = document.getElementById("btn_fm_context_menu_open")
 
 // footer bar
 const btnZoomIn = document.getElementById("btn_zoom_in")

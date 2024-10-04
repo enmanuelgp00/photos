@@ -95,7 +95,7 @@ html, body {
     transition: transform 0.5s ease, scale 0.5s ease;
 }
 #view_media:hover {
-    cursor: pointer;
+    cursor: grab;
 }
 /*
   footer bar
@@ -188,8 +188,8 @@ html, body {
     position: absolute;
     right: 0;
     top: -45px;
-    visibility: visible;
-    transform: opacity 0.5s ease;
+    visibility: visible;    
+    transition: opacity 0.5s ease;
 }
 #btn_shift img {
     transition: transform 0.5s ease;

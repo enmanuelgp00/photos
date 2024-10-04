@@ -1,63 +1,70 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Photos Gallery</title>
-        <link rel="stylesheet" href="./src/css/classes.css">
-        <link rel="stylesheet" href="./src/css/gallery_style.css">
 
-        <script src="./src/js/gallery_main.js" defer></script>
-    </head>
-    <body>
-        <main>
-            <header id="top_bar">
-                <a id="logo" class="center_content btn_corner" href="photos.html">
-                    <img src="./src/icons/home_white_0.png" class="icon_small" alt="logo">
-                </a>
-                <div id="wrapper_input_search" class="center_content">
-                    <input type="search" placeholder="Seach in all photos">
-                    <div id="btn_search" class="button_background center_content">
-                        <img src="./src/icons/magnifier_white_0.png" class="icon_smaller" alt="magnifier">
-                    </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos Gallery</title>
+    <link rel="stylesheet" href="./src/css/classes.css">
+    <link rel="stylesheet" href="./src/css/gallery_style.css">
+
+    <script src="./src/js/gallery_main.js" defer></script>
+</head>
+
+<body>
+    <main>
+        <header id="top_bar">
+            <a id="logo" class="center_content btn_corner" href="photos.html">
+                <img src="./src/icons/home_white_0.png" class="icon_small" alt="logo">
+            </a>
+            <div>                
+            <!-- <span>Photos</span> -->
+            </div>
+            <div id="wrapper_input_search" class="center_content">
+                <input type="search" placeholder="Seach in all photos">
+                <div id="btn_search" class="btn_square center_content">
+                    <img src="./src/icons/magnifier_white_0.png" class="icon_smaller" alt="magnifier">
                 </div>
-                <div id="btn_import" class="button_background center_content">
+            </div>
+            <div id="wrapper_top_bar_options" class="center_content">
+                <div id="btn_import" class="btn_square center_content">
                     <img src="./src/icons/import_white_0.png" class="icon_small" alt="">
                     <!-- <span> Import </span> -->
                 </div>
-                <div id="btn_settings" class="button_background center_content">
+                <div id="btn_settings" class="btn_square center_content">
                     <img src="./src/icons/settings_white_0.png" class="icon_small" alt="settings">
                 </div>
-                <div id="frame_window_controls">
-                    <div id="btn_close" class="center_content">
-                        <img alt="cls" src="./src/icons/close_0.png">
+            </div>
+            </div>
+            <div id="frame_window_controls">
+                <div id="btn_close" class="center_content">
+                    <img alt="cls" src="./src/icons/close_0.png">
+                </div>
+        </header>
+
+        <section id="content">
+
+            <aside id="aside_bar">
+                <div id="aside_options">
+                    <div id="btn_open_navigation" class="btn_square center_content">
+                        <img src="./src/icons/navigation_white_0.png" class="icon_small" alt="btn_open_navigation">
+                    </div>
+                    <div id="btn_all_media" class="btn_square center_content">
+                        <img src="./src/icons/gallery_white_0.png" class="icon_small" alt="btn_all_media">
+                    </div>
+                    <div id="btn_favorites" class="btn_square center_content">
+                        <img src="./src/icons/heart_full_white_0.png" class="icon_small" alt="btn_favorites">
+                    </div>
+                    <div id="btn_folder" class="btn_square center_content">
+                        <img src="./src/icons/folder_white_0.png" class="icon_small" alt="btn_folder">
                     </div>
                 </div>
-            </header>
+            </aside>
+                <iframe  id="about" src="./about/all_photos.html">
 
-            <section id="content">
+                </iframe>
+        </section>
+    </main>
+</body>
 
-                <aside id="aside_bar">
-                    <div id="aside_options">
-                        <div id="btn_open_navigation" class="button_background center_content">
-                            <img src="./src/icons/navigation_white_0.png" class="icon_small" alt="btn_open_navigation">
-                        </div>
-                        <div id="btn_all_media" class="button_background center_content">
-                            <img src="./src/icons/gallery_white_0.png" class="icon_small" alt="btn_all_media">
-                        </div>
-                        <div id="btn_favorites" class="button_background center_content">
-                            <img src="./src/icons/heart_full_white_0.png" class="icon_small" alt="btn_favorites">
-                        </div>
-                        <div id="btn_folder" class="button_background center_content">
-                            <img src="./src/icons/folder_white_0.png" class="icon_small" alt="btn_folder">
-                        </div>
-                    </div>
-                </aside>
-
-                <section id="about">
-                    
-                </section>
-            </section>
-        </main>
-    </body>
 </html>

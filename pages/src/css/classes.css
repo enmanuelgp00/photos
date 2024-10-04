@@ -11,13 +11,13 @@
 .animation_grow:active {
     transform: none;
 }
-.button_background {   
+.btn_square {   
     min-height: 29px;
     min-width : 29px;
     border-radius: 5px;
     padding: 5px;
 }
-.button_background:hover {
+.btn_square:hover {
     cursor: pointer;
     background-color: rgba(100, 100, 100, 0.3);
     transition: background-color 0.3 ease;
@@ -71,6 +71,7 @@
 
 #frame_window_controls {
     display: flex;
+    height: 100%;
     justify-content: center;
     align-items: flex-start;
 } 
@@ -86,4 +87,28 @@
 }
 #btn_close:hover {
     background-color: rgba(255, 0, 0, 0.7);
+}
+.underParent {
+    z-index: -1;
+}
+.context_menu {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(39, 39, 39);
+    padding: 3px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px 0px black;
+}
+.context_menu div {
+    display: flex;
+    justify-content: center;
+    min-width: 77px;
+    border-radius: 5px;
+    padding: 5px;
+}
+.context_menu div:hover {
+    cursor: pointer;
+    background-color: rgba(100, 100, 100, 0.3);
 }

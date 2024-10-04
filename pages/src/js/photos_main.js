@@ -1,7 +1,6 @@
 /*
     * cursor whait while loading media
     * Drag directly on image if cursor gets out of it, stops dragging
-    * Dinamic zoom
 
 */
 let index = 0
@@ -46,9 +45,6 @@ viewPicImg.addEventListener("transitionstart", function () {
         showZoomInfo()
     }, { once: true })
 })
-viewPicImg.addEventListener("dblclick", () => {
-    inputMedia.click()
-})
 
 btnNextSpace.addEventListener("click", () => {
     showNextMedia()
@@ -74,13 +70,25 @@ btnShift.addEventListener("mouseout", () => {
 btnFullscreen.addEventListener("click", function () {
     if (viewMedia.isOverflowHidden()) {
         hideBars()
+        btnShift.classList.add("visibleOnHover")
     }
 })
 document.addEventListener("keydown", function (eDown) {
+
     if (!viewframePic.isOverflowHidden()) {
         if (eDown.key == "Escape") {
             showBars()
+            btnShift.classList.remove("visibleOnHover")
         }
+    }
+})
+framePic.addEventListener("dblclick", () => {
+    if (viewMedia.isOverflowHidden()) {
+        hideBars()
+        btnShift.classList.add("visibleOnHover")
+    } else {
+        showBars()
+        btnShift.classList.remove("visibleOnHover")
     }
 })
 
@@ -98,18 +106,16 @@ btnZoomFit.addEventListener("click", () => { zoomFit() })
     zooming in/out image with the mouse wheel
 */
 let wheelCount = 0.1
-let intervalWheelCount = setInterval(()=>{
+let intervalWheelCount = setInterval(() => {
     wheelCount = 0.1
-    console.log("checkpoint")
 }, 500)
 framePic.addEventListener("wheel", function (event) {
-    console.log(wheelCount)
 
     if (event.deltaY < 0) {
         zoomIn(0.2 * wheelCount)
     } else {
         zoomOut(0.2 * wheelCount)
-    }    
+    }
     wheelCount += 0.5
 })
 /*
@@ -155,7 +161,7 @@ framePic.addEventListener("mouseup", function () {
     isDragging = false
 
     viewMedia.style.cursor = "default"
-    viewPicImg.style.cursor = "pointer"
+    viewPicImg.style.cursor = "grab"
 })
 
 framePic.addEventListener("mouseout", function () {
@@ -164,9 +170,7 @@ framePic.addEventListener("mouseout", function () {
     btnNextSpace.querySelector("div").style.visibility = "visible"
     btnPrevSpace.querySelector("div").style.visibility = "visible"
     viewMedia.showTransition()
-    isDragging = false    
-    
-    viewPicImg.style.cursor = "pointer"
+    isDragging = false
 })
 
 // menu options
@@ -186,4 +190,18 @@ btnClose.addEventListener("click", () => {
     cleanMediaFiles()
     showMedia(getMediaFiles())
     zoomFit()
+})
+
+// contextmenu
+framePic.addEventListener("contextmenu", () => {
+    fMContextMenu.style.display = "flex"
+})
+btnFMContextMenu.addEventListener("click", () => {
+    inputMedia.click()
+})
+
+handleEventOutSide("click", fMContextMenu, () => {
+    if(fMContextMenu.style.display != "none") {    
+        fMContextMenu.style.display = "none"
+    }
 })

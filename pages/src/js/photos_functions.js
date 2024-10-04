@@ -55,13 +55,12 @@ function hideBars() {
     footerBar.style.transform = "translateY(40px)"
     menuBar.style.transform = "translateY(-50px)"
     framePic.style.overflow = "visible"
-    btnShift.style.opacity = 0.5
+    viewMedia.setOverflow("visible")
 }
 function showBars() {
     footerBar.style.transform = "translateY(0px)"
     menuBar.style.transform = "translateY(0px)"
     viewMedia.setOverflow("hidden")
-    btnShift.style.opacity = 1
 }
 
 function rotatePicRight(deg) {
@@ -76,17 +75,17 @@ function getZoom() {
 function setZoom(zoom) {
     viewMedia.style.scale = zoom
 }
-function zoomIn() {
-    let factor = 0.2
+function zoomIn(f) {
+    let factor = f
     setZoom(getZoom() + factor)
 }
-function zoomOut() {
-    let factor = 0.2
-    if (getZoom() - factor > factor) {
+function zoomOut(f) {
+    let factor = f
+    // if (getZoom() - factor > factor) {
         setZoom(getZoom() - factor)
-    } else {
-        setZoom(factor)
-    }
+    // } else {
+        // setZoom(factor)
+    // }
 }
 function zoomFit () {
     viewMedia.setDefault("all")
@@ -99,12 +98,21 @@ function showZoomInfo() {
     viewZoomPercent.innerHTML = (getZoom() * 100).toFixed(0) + "%"
 }
 function showAndHide(element, duration) {
-    element.style.opacity = 1
+    // element.style.opacity = 1
     setTimeout(() => { 
-        element.style.opacity = 0
+        // element.style.opacity = 0        
+        element.classList.add('visibleOnHover')
     }, duration)
+    element.classList.add()
 }
 function cleanMediaFiles() {
    inputMedia.value = ""
 //    inputForm.reset()  another way
+}
+function handleEventOutSide(e , element, fun) {
+    document.addEventListener(e, (dcEvent)=>{        
+    if(!element.contains(dcEvent.target)) {
+        fun()
+    }
+    })
 }
