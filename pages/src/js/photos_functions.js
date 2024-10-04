@@ -98,9 +98,7 @@ function showZoomInfo() {
     viewZoomPercent.innerHTML = (getZoom() * 100).toFixed(0) + "%"
 }
 function showAndHide(element, duration) {
-    // element.style.opacity = 1
-    setTimeout(() => { 
-        // element.style.opacity = 0        
+    setTimeout(() => {        
         element.classList.add('visibleOnHover')
     }, duration)
     element.classList.add()
@@ -116,3 +114,4 @@ function handleEventOutSide(e , element, fun) {
     }
     })
 }
+

@@ -17,7 +17,7 @@ const footerBar = document.getElementById("footer_bar")
 const btnFullscreen = document.getElementById("btn_fullscreen")
 
 const btnRotatePic = document.getElementById("btn_rotate")
-let allElements = document.querySelectorAll("#wrapper *")
+let allElements = document.querySelectorAll("body *")
 
 // menu bar
 const btnClose = document.getElementById("btn_close")

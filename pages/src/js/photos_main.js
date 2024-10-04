@@ -124,21 +124,24 @@ framePic.addEventListener("wheel", function (event) {
 let startX, startY
 let transX, transY
 framePic.addEventListener("mousedown", function (eCursor) {
-    isDragging = true
-    startX = eCursor.clientX
-    startY = eCursor.clientY
-    viewMedia.hideTransition("transform")
-    viewMedia.style.transition = "none"
+    if(eCursor.button != 2) {
 
-    transX = viewMedia.getTranslationX()
-    transY = viewMedia.getTranslationY()
-
-    btnNextSpace.style.visibility = "hidden"
-    btnPrevSpace.style.visibility = "hidden"
-    btnNextSpace.querySelector("div").style.visibility = "hidden"
-    btnPrevSpace.querySelector("div").style.visibility = "hidden"
-
-    viewPicImg.style.cursor = "grab"
+        isDragging = true
+        startX = eCursor.clientX
+        startY = eCursor.clientY
+        viewMedia.hideTransition("transform")
+        viewMedia.style.transition = "none"
+    
+        transX = viewMedia.getTranslationX()
+        transY = viewMedia.getTranslationY()
+    
+        btnNextSpace.style.visibility = "hidden"
+        btnPrevSpace.style.visibility = "hidden"
+        btnNextSpace.querySelector("div").style.visibility = "hidden"
+        btnPrevSpace.querySelector("div").style.visibility = "hidden"
+    
+        viewPicImg.style.cursor = "grab"
+    }
 
 })
 framePic.addEventListener("mousemove", function (eCursor) {
@@ -193,8 +196,13 @@ btnClose.addEventListener("click", () => {
 })
 
 // contextmenu
-framePic.addEventListener("contextmenu", () => {
+framePic.addEventListener("contextmenu", (e) => {
+    let rect = framePic.getBoundingClientRect()
+    fMContextMenu.style.left = `${e.clientX - rect.left}px`
+    fMContextMenu.style.top  = `${e.clientY - rect.top}px`
     fMContextMenu.style.display = "flex"
+    console.log(e.clientX)    
+    console.log(e.clientY)
 })
 btnFMContextMenu.addEventListener("click", () => {
     inputMedia.click()
