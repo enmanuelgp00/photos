@@ -1,8 +1,14 @@
 /*
     * title next to the logo
 */
-asideBar.addEventListener("click", (e)=>{
+preventDefault(["contextmenu","mousedown","dragstart"])
+moveSPointerTo(btnAllMedia)
+asideOptions.addEventListener("click", (e)=>{
     moveSPointerTo(e.target)
 })
 btnOpenNav.addEventListener("click", toggleNav)
-moveSPointerTo(btnOpenNav)
+scrollPointer.addEventListener("transitionend", (e)=>{
+    // alert(`${e.}`)
+    
+    scrollPointer.style.bottom = "10px"
+})

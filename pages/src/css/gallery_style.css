@@ -57,16 +57,19 @@ input[type="search"]:focus {
     
 }
 #aside_bar {
-    position: relative;
     background-color:rgb(31, 31, 31);
     width: 50px;
     display: flex;
     flex-direction: column;
     transition: width 0.7s ease;
+    overflow: hidden;
 }
-#aside_bar .button_background {
+#aside_bar .btn_square {
     border-top: 1px solid rgba(100, 100, 100, 0.5);
     justify-content: center;
+}
+#aside_options {    
+    position: relative;
 }
 #scroll {
     position: absolute;
@@ -78,7 +81,7 @@ input[type="search"]:focus {
     height: 10px;
     background-color: rgb(118, 185, 237);
     border-radius: 5px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, height 0.3s ease;
 }
 .groupBtn {
     margin-left: 5px;

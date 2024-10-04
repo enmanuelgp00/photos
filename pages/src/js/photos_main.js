@@ -124,22 +124,22 @@ framePic.addEventListener("wheel", function (event) {
 let startX, startY
 let transX, transY
 framePic.addEventListener("mousedown", function (eCursor) {
-    if(eCursor.button != 2) {
+    if (eCursor.button != 2) {
 
         isDragging = true
         startX = eCursor.clientX
         startY = eCursor.clientY
         viewMedia.hideTransition("transform")
         viewMedia.style.transition = "none"
-    
+
         transX = viewMedia.getTranslationX()
         transY = viewMedia.getTranslationY()
-    
+
         btnNextSpace.style.visibility = "hidden"
         btnPrevSpace.style.visibility = "hidden"
         btnNextSpace.querySelector("div").style.visibility = "hidden"
         btnPrevSpace.querySelector("div").style.visibility = "hidden"
-    
+
         viewPicImg.style.cursor = "grab"
     }
 
@@ -167,13 +167,15 @@ framePic.addEventListener("mouseup", function () {
     viewPicImg.style.cursor = "grab"
 })
 
-framePic.addEventListener("mouseout", function () {
-    btnNextSpace.style.visibility = "visible"
-    btnPrevSpace.style.visibility = "visible"
-    btnNextSpace.querySelector("div").style.visibility = "visible"
-    btnPrevSpace.querySelector("div").style.visibility = "visible"
-    viewMedia.showTransition()
-    isDragging = false
+framePic.addEventListener("mouseout", function (e) {
+    if (!e.target.contains(viewPicImg)) {
+        btnNextSpace.style.visibility = "visible"
+        btnPrevSpace.style.visibility = "visible"
+        btnNextSpace.querySelector("div").style.visibility = "visible"
+        btnPrevSpace.querySelector("div").style.visibility = "visible"
+        viewMedia.showTransition()
+        isDragging = false
+    }
 })
 
 // menu options
@@ -189,24 +191,24 @@ btnTrashCan.addEventListener("click", () => {
     window.open(media.getURL())
 })
 
-btnClose.addEventListener("click", reset )
+btnClose.addEventListener("click", reset)
 
 // fmcontextmenu
 framePic.addEventListener("contextmenu", (e) => {
     let rect = framePic.getBoundingClientRect()
     fMCntxtMenu.style.left = `${e.clientX - rect.left}px`
-    fMCntxtMenu.style.top  = `${e.clientY - rect.top}px`
+    fMCntxtMenu.style.top = `${e.clientY - rect.top}px`
     showElement(fMCntxtMenu) //.style.display = "flex"
 })
 btnFMCntxtMenuOpen.addEventListener("click", () => {
     inputMedia.click()
 })
 handleEventOutSide("click", fMCntxtMenu, () => {
-    if(fMCntxtMenu.style.display != "none") {    
+    if (fMCntxtMenu.style.display != "none") {
         hideElement(fMCntxtMenu)
     }
 })
-btnFMCntxtMenuClose.addEventListener("click", ()=>{
+btnFMCntxtMenuClose.addEventListener("click", () => {
     reset()
     hideElement(fMCntxtMenu)
 })

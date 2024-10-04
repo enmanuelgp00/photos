@@ -15,10 +15,11 @@ function toggleNav () {
     }
 }
 function moveSPointerTo(element){
-    let parentTop = asideBar.getBoundingClientRect().top
+    let parentTop = asideOptions.getBoundingClientRect().top
     let top  = element.getBoundingClientRect().top
     let center = element.getBoundingClientRect().height / 2 - scrollPointer.getBoundingClientRect().height / 2
     let targetTop = top - parentTop + center 
-
+    // scrollPointer.style.height = "15px"
+    
     scrollPointer.style.transform = `translateY(${targetTop}px)`
 }
