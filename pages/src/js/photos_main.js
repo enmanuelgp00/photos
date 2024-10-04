@@ -1,12 +1,12 @@
 /*
     * cursor whait while loading media
     * Drag directly on image if cursor gets out of it, stops dragging
-    * Dinamic opacity in left and right browsing buttons
+    * Dinamic zoom
 
 */
 let index = 0
 let viewPicImg = viewMedia.getElement()
-let defaultMedia = {name:"Gallery", url:viewPicImg.src}
+let defaultMedia = { name: "Gallery", url: viewPicImg.src }
 let isDragging = false
 let startLeft, startTop
 let eventNames = [
@@ -90,20 +90,27 @@ btnRotatePic.addEventListener("click", function () {
     rotatePicRight(angle)
 })
 
-btnZoomIn.addEventListener("click", zoomIn)
-btnZoomOut.addEventListener("click", zoomOut)
-btnZoomFit.addEventListener("click", zoomFit)
+btnZoomIn.addEventListener("click", () => { zoomIn(0.2) })
+btnZoomOut.addEventListener("click", () => { zoomOut(0.2) })
+btnZoomFit.addEventListener("click", () => { zoomFit() })
 
 /*
     zooming in/out image with the mouse wheel
 */
-
+let wheelCount = 0.1
+let intervalWheelCount = setInterval(()=>{
+    wheelCount = 0.1
+    console.log("checkpoint")
+}, 500)
 framePic.addEventListener("wheel", function (event) {
+    console.log(wheelCount)
+
     if (event.deltaY < 0) {
-        zoomIn()
+        zoomIn(0.2 * wheelCount)
     } else {
-        zoomOut()
-    }
+        zoomOut(0.2 * wheelCount)
+    }    
+    wheelCount += 0.5
 })
 /*
     Moving image
@@ -124,7 +131,9 @@ framePic.addEventListener("mousedown", function (eCursor) {
     btnPrevSpace.style.visibility = "hidden"
     btnNextSpace.querySelector("div").style.visibility = "hidden"
     btnPrevSpace.querySelector("div").style.visibility = "hidden"
-    
+
+    viewPicImg.style.cursor = "grab"
+
 })
 framePic.addEventListener("mousemove", function (eCursor) {
     if (isDragging) {
@@ -133,6 +142,9 @@ framePic.addEventListener("mousemove", function (eCursor) {
         let posX = transX - distX
         let posY = transY - distY
         viewMedia.setTranslation(posX, posY)
+        viewMedia.style.cursor = "grabbing"
+        viewPicImg.style.cursor = "grabbing"
+        viewPicImg.classList.add("underParent")
     }
 })
 framePic.addEventListener("mouseup", function () {
@@ -141,6 +153,9 @@ framePic.addEventListener("mouseup", function () {
     btnNextSpace.style.visibility = "visible"
     btnPrevSpace.style.visibility = "visible"
     isDragging = false
+
+    viewMedia.style.cursor = "default"
+    viewPicImg.style.cursor = "pointer"
 })
 
 framePic.addEventListener("mouseout", function () {
@@ -149,7 +164,9 @@ framePic.addEventListener("mouseout", function () {
     btnNextSpace.querySelector("div").style.visibility = "visible"
     btnPrevSpace.querySelector("div").style.visibility = "visible"
     viewMedia.showTransition()
-    isDragging = false
+    isDragging = false    
+    
+    viewPicImg.style.cursor = "pointer"
 })
 
 // menu options
@@ -163,7 +180,7 @@ btnHeart.addEventListener("click", function () {
 
 btnTrashCan.addEventListener("click", () => {
     window.open(media.getURL())
-}) 
+})
 
 btnClose.addEventListener("click", () => {
     cleanMediaFiles()
