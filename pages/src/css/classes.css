@@ -105,6 +105,7 @@
     margin: 10px;
     border-radius: 5px;
     box-shadow: 3px 3px 10px 5px rgba(0, 0, 0, 0.5);
+    text-wrap: nowrap;
 }
 .context_menu div {
     display: flex;

@@ -78,6 +78,7 @@ input[type="search"]:focus {
     height: 10px;
     background-color: rgb(118, 185, 237);
     border-radius: 5px;
+    transition: transform 0.3s ease;
 }
 .groupBtn {
     margin-left: 5px;

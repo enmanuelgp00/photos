@@ -107,13 +107,6 @@ function cleanMediaFiles() {
    inputMedia.value = ""
 //    inputForm.reset()  another way
 }
-function handleEventOutSide(e , element, fun) {
-    document.addEventListener(e, (dcEvent)=>{        
-    if(!element.contains(dcEvent.target)) {
-        fun()
-    }
-    })
-}
 
 function reset() {
     cleanMediaFiles()
