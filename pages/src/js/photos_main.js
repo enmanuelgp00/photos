@@ -81,6 +81,7 @@ document.addEventListener("keydown", function (eDown) {
             btnShift.classList.remove("visibleOnHover")
         }
     }
+    clearInterval(slidershow)
 })
 framePic.addEventListener("dblclick", () => {
     if (viewMedia.isOverflowHidden()) {
@@ -200,13 +201,26 @@ framePic.addEventListener("contextmenu", (e) => {
     fMCntxtMenu.style.top = `${e.clientY - rect.top}px`
     showElement(fMCntxtMenu) //.style.display = "flex"
 })
-btnFMCntxtMenuOpen.addEventListener("click", () => {
-    inputMedia.click()
-})
 handleEventOutSide("click", fMCntxtMenu, () => {
     if (fMCntxtMenu.style.display != "none") {
         hideElement(fMCntxtMenu)
     }
+})
+btnFMCntxtMenuOpen.addEventListener("click", () => {
+    if(inputMedia.hasAttribute("webkitdirectory")) inputMedia.removeAttribute('webkitdirectory')
+    inputMedia.click()
+})
+btnFMCntxtMenuFolder.addEventListener("click", () => {
+    if(!inputMedia.hasAttribute("webkitdirectory")) inputMedia.setAttribute('webkitdirectory','')
+    inputMedia.click()
+})
+let slidershow
+btnFMCntxtMenuSlidershow.addEventListener("click", () => {
+    slidershow = setInterval(()=>{
+        showRandomPic()
+    }, 10000)
+    hideBars()    
+    hideElement(fMCntxtMenu)
 })
 btnFMCntxtMenuClose.addEventListener("click", () => {
     reset()

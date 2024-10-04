@@ -78,7 +78,7 @@ input[type="search"]:focus {
     margin-left: 6px;
 }
 #scroll_pointer {
-    height: 10px;
+    height: 5px;
     background-color: rgb(118, 185, 237);
     border-radius: 5px;
     transition: transform 0.3s ease, height 0.3s ease;
