@@ -189,25 +189,24 @@ btnTrashCan.addEventListener("click", () => {
     window.open(media.getURL())
 })
 
-btnClose.addEventListener("click", () => {
-    cleanMediaFiles()
-    showMedia(getMediaFiles())
-    zoomFit()
-})
+btnClose.addEventListener("click", reset )
 
-// contextmenu
+// fmcontextmenu
 framePic.addEventListener("contextmenu", (e) => {
     let rect = framePic.getBoundingClientRect()
-    fMContextMenu.style.left = `${e.clientX - rect.left}px`
-    fMContextMenu.style.top  = `${e.clientY - rect.top}px`
-    fMContextMenu.style.display = "flex"
+    fMCntxtMenu.style.left = `${e.clientX - rect.left}px`
+    fMCntxtMenu.style.top  = `${e.clientY - rect.top}px`
+    showElement(fMCntxtMenu) //.style.display = "flex"
 })
-btnFMContextMenu.addEventListener("click", () => {
+btnFMCntxtMenuOpen.addEventListener("click", () => {
     inputMedia.click()
 })
-
-handleEventOutSide("click", fMContextMenu, () => {
-    if(fMContextMenu.style.display != "none") {    
-        fMContextMenu.style.display = "none"
+handleEventOutSide("click", fMCntxtMenu, () => {
+    if(fMCntxtMenu.style.display != "none") {    
+        hideElement(fMCntxtMenu)
     }
+})
+btnFMCntxtMenuClose.addEventListener("click", ()=>{
+    reset()
+    hideElement(fMCntxtMenu)
 })

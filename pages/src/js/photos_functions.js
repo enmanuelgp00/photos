@@ -115,3 +115,15 @@ function handleEventOutSide(e , element, fun) {
     })
 }
 
+function reset() {
+    cleanMediaFiles()
+    showMedia(getMediaFiles())
+    zoomFit()
+}
+
+function hideElement(elemt){
+    elemt.style.display = "none"
+}
+function showElement(elemt, display="flex") {
+    elemt.style.display = display
+}
